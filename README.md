@@ -1,47 +1,63 @@
 # @unibase/openclaw-plugin-membase
 
-Encrypted memory backup and restore plugin for OpenClaw using Membase decentralized storage.
+Encrypted memory backup and restore for AI agents using Membase decentralized storage.
 
 ## Features
 
-- 🔐 End-to-end encryption (AES-256-GCM)
-- 🌐 Decentralized storage via Membase
-- 📦 Incremental backup support
-- 🤖 Auto-backup on agent completion
-- 🔄 Backup version management (diff, cleanup)
+- End-to-end encryption (AES-256-GCM)
+- Decentralized Membase storage
+- Incremental backup support
+- Auto-backup on agent completion
 
-## Installation
+---
 
+## 1. AgentSkills
+
+AI agents auto-discover and use this skill by reading [skills/membase/SKILL.md](skills/membase/SKILL.md).
+
+**Setup:**
 ```bash
-npm install @unibase/openclaw-plugin-membase
+export MEMBASE_ACCOUNT=your-account-address
+export MEMBASE_SECRET_KEY=your-secret-key
+export MEMBASE_BACKUP_PASSWORD=your-backup-password
 ```
 
-## Quick Start
+**Commands:**
+```bash
+cd skills/membase
+node membase.ts backup [--incremental]
+node membase.ts restore <backup-id>
+node membase.ts list
+node membase.ts diff <backup-id-1> <backup-id-2>
+node membase.ts status
+node membase.ts cleanup [--keep-last <n>]
+```
 
-See [Quick Start Guide](./docs/QUICKSTART.md) for detailed usage instructions.
+See [SKILL.md](skills/membase/SKILL.md) for complete instructions.
 
-### Basic Configuration
+---
 
-Add to `~/.openclaw/openclaw.json`:
+## 2. OpenClaw Extension
 
+Integrates with OpenClaw to provide CLI commands and auto-backup hooks.
+
+**Install:**
+```bash
+npm install github:unibaseio/openclaw-plugin-membase
+```
+
+**Configure** `~/.openclaw/openclaw.json`:
 ```json
 {
   "plugins": {
-    "slots": {
-      "memory": "memory-membase"
-    },
+    "slots": { "memory": "memory-membase" },
     "entries": {
       "memory-membase": {
         "enabled": true,
         "config": {
           "endpoint": "https://testnet.hub.membase.io",
           "agentName": "my-agent",
-          "workspaceDir": "~/.openclaw/workspace",
-          "autoBackup": {
-            "enabled": true,
-            "onAgentEnd": true,
-            "minInterval": 3600
-          }
+          "autoBackup": { "enabled": true, "minInterval": 3600 }
         }
       }
     }
@@ -49,47 +65,32 @@ Add to `~/.openclaw/openclaw.json`:
 }
 ```
 
-### Environment Variables
+Set environment variables (same as above).
 
+**Commands:**
 ```bash
-export MEMBASE_ACCOUNT=your-account-address
-export MEMBASE_SECRET_KEY=your-secret-key
-export MEMBASE_BACKUP_PASSWORD=your-backup-password
-```
-
-### Basic Commands
-
-```bash
-# Create backup
-openclaw membase backup --password 'YourPassword'
-
-# List backups
+openclaw membase backup [--incremental]
+openclaw membase restore <backup-id>
 openclaw membase list
-
-# Restore backup
-openclaw membase restore <backup-id> --password 'YourPassword'
-
-# Check status
 openclaw membase status
 ```
 
-## Documentation
+Auto-backup triggers after agent sessions when enabled.
 
-- [Installation Guide](./INSTALLATION.md)
-- [Quick Start Guide](./docs/QUICKSTART.md)
+---
 
 ## Security
 
-- AES-256-GCM authenticated encryption
+- AES-256-GCM encryption
 - PBKDF2 key derivation (100,000 iterations)
-- Client-side encryption only
-- Zero-knowledge architecture
-
-## License
-
-MIT
+- Client-side only, zero-knowledge
 
 ## Links
 
 - [Membase](https://github.com/unibaseio/membase)
 - [OpenClaw](https://github.com/openclaw/openclaw)
+- [AgentSkills](https://agentskills.io)
+
+## License
+
+MIT

@@ -10,18 +10,18 @@
 		"noImplicitAny": false,
 		"resolveJsonModule": true,
 		"outDir": "./dist",
-		"rootDir": "./",
+		"rootDir": "./src",
 		"declaration": true,
 		"declarationMap": true,
 		"sourceMap": true
 	},
 	"include": [
-		"index.ts",
 		"src/**/*.ts"
 	],
 	"exclude": [
 		"node_modules",
 		"dist",
-		"test"
+		"test",
+		"skills"
 	]
 }

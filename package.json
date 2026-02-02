@@ -1,23 +1,38 @@
 {
 	"name": "@unibase/openclaw-plugin-membase",
-	"version": "0.1.0",
-	"description": "Encrypted memory backup and restore via Membase for OpenClaw",
+	"version": "1.0.0",
+	"description": "Membase backup skills for AI agents (AgentSkills standard) + OpenClaw Extension",
 	"type": "module",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
+	"bin": {
+		"membase": "skills/membase/membase.ts"
+	},
 	"files": [
 		"dist",
+		"skills",
 		"README.md",
 		"LICENSE"
 	],
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
+		},
+		"./skills/*": "./skills/*",
+		"./lib/*": "./dist/lib/*"
+	},
 	"scripts": {
-		"build": "tsc",
+		"build": "tsc && npm run link-lib",
+		"link-lib": "cd skills/membase && rm -f lib && ln -sf ../../dist/lib lib",
 		"dev": "tsc --watch",
 		"prepublishOnly": "npm run build"
 	},
 	"keywords": [
+		"agentskills",
 		"openclaw",
 		"openclaw-plugin",
+		"claude",
 		"plugin",
 		"memory",
 		"backup",

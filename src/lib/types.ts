@@ -87,6 +87,6 @@ export interface MembaseConfig {
 	autoBackup?: {
 		enabled: boolean;
 		onAgentEnd?: boolean;
-		minInterval?: number; // 最小备份间隔（秒）
+		minInterval?: number; // Minimum backup interval in seconds
 	};
 }

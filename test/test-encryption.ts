@@ -3,7 +3,7 @@
  * Test encryption module independently
  */
 
-import { MemoryEncryption } from "../src/encryption.js";
+import { MemoryEncryption } from "../src/lib/encryption.js";
 
 console.log("🧪 Testing Encryption Module\n");
 
@@ -14,23 +14,23 @@ const password = "Test1234!@#$";
 
 try {
 	const encrypted = MemoryEncryption.encrypt(plaintext, password);
-	console.log("  ✓ Encryption successful");
+	console.log("  [OK] Encryption successful");
 	console.log(`    Ciphertext length: ${encrypted.ciphertext.length}`);
 	console.log(`    IV length: ${encrypted.iv.length}`);
 	console.log(`    Auth tag length: ${encrypted.authTag.length}`);
 	console.log(`    Salt length: ${encrypted.salt.length}`);
 
 	const decrypted = MemoryEncryption.decrypt(encrypted, password);
-	console.log("  ✓ Decryption successful");
+	console.log("  [OK] Decryption successful");
 
 	if (decrypted === plaintext) {
-		console.log("  ✓ Plaintext matches!");
+		console.log("  [OK] Plaintext matches!");
 	} else {
-		console.log("  ✗ Plaintext mismatch!");
+		console.log("  [FAIL] Plaintext mismatch!");
 		process.exit(1);
 	}
 } catch (error) {
-	console.error("  ✗ Test failed:", error);
+	console.error("  [FAIL] Test failed:", error);
 	process.exit(1);
 }
 
@@ -40,27 +40,27 @@ try {
 	const encrypted = MemoryEncryption.encrypt(plaintext, password);
 	const wrongPassword = "WrongPassword123!";
 	MemoryEncryption.decrypt(encrypted, wrongPassword);
-	console.log("  ✗ Should have thrown an error!");
+	console.log("  [FAIL] Should have thrown an error!");
 	process.exit(1);
 } catch (error) {
-	console.log("  ✓ Correctly rejected wrong password");
+	console.log("  [OK] Correctly rejected wrong password");
 }
 
 // Test 3: Password validation
 console.log("\nTest 3: Password validation");
 try {
 	MemoryEncryption.validatePassword("weak");
-	console.log("  ✗ Should have rejected weak password!");
+	console.log("  [FAIL] Should have rejected weak password!");
 	process.exit(1);
 } catch (error) {
-	console.log("  ✓ Correctly rejected weak password");
+	console.log("  [OK] Correctly rejected weak password");
 }
 
 try {
 	MemoryEncryption.validatePassword("StrongPass123!@#");
-	console.log("  ✓ Accepted strong password");
+	console.log("  [OK] Accepted strong password");
 } catch (error) {
-	console.log("  ✗ Should have accepted strong password!");
+	console.log("  [FAIL] Should have accepted strong password!");
 	process.exit(1);
 }
 
@@ -72,16 +72,16 @@ const hash3 = MemoryEncryption.hash("Different text");
 
 console.log(`  Hash 1: ${hash1.substring(0, 16)}...`);
 if (hash1 === hash2) {
-	console.log("  ✓ Same content produces same hash");
+	console.log("  [OK] Same content produces same hash");
 } else {
-	console.log("  ✗ Hash should be deterministic!");
+	console.log("  [FAIL] Hash should be deterministic!");
 	process.exit(1);
 }
 
 if (hash1 !== hash3) {
-	console.log("  ✓ Different content produces different hash");
+	console.log("  [OK] Different content produces different hash");
 } else {
-	console.log("  ✗ Different content should have different hash!");
+	console.log("  [FAIL] Different content should have different hash!");
 	process.exit(1);
 }
 
@@ -92,13 +92,13 @@ try {
 	const encrypted = MemoryEncryption.encrypt(largeData, password);
 	const decrypted = MemoryEncryption.decrypt(encrypted, password);
 	if (decrypted === largeData) {
-		console.log("  ✓ Successfully encrypted/decrypted 100 KB");
+		console.log("  [OK] Successfully encrypted/decrypted 100 KB");
 	} else {
-		console.log("  ✗ Large data corruption!");
+		console.log("  [FAIL] Large data corruption!");
 		process.exit(1);
 	}
 } catch (error) {
-	console.error("  ✗ Large data test failed:", error);
+	console.error("  [FAIL] Large data test failed:", error);
 	process.exit(1);
 }
 
@@ -109,14 +109,14 @@ try {
 	const encrypted = MemoryEncryption.encrypt(unicodeText, password);
 	const decrypted = MemoryEncryption.decrypt(encrypted, password);
 	if (decrypted === unicodeText) {
-		console.log("  ✓ Unicode preserved correctly");
+		console.log("  [OK] Unicode preserved correctly");
 	} else {
-		console.log("  ✗ Unicode corrupted!");
+		console.log("  [FAIL] Unicode corrupted!");
 		process.exit(1);
 	}
 } catch (error) {
-	console.error("  ✗ Unicode test failed:", error);
+	console.error("  [FAIL] Unicode test failed:", error);
 	process.exit(1);
 }
 
-console.log("\n✅ All encryption tests passed!\n");
+console.log("\nSuccess All encryption tests passed!\n");

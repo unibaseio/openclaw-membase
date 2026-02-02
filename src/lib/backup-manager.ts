@@ -122,7 +122,7 @@ export class BackupManager {
 			totalSize += file.size;
 		}
 
-		console.log("\n✓ Backup completed");
+		console.log("\n[OK] Backup completed");
 
 		return {
 			backupId,
@@ -169,7 +169,7 @@ export class BackupManager {
 				await writeFile(absPath, content, "utf-8");
 
 				const sizeKb = Math.round(metadata.size / 1024);
-				console.log(`  ✓ ${filePath} (${sizeKb} KB)`);
+				console.log(`  [OK] ${filePath} (${sizeKb} KB)`);
 				totalSize += metadata.size;
 			} catch (error) {
 				if (
@@ -182,7 +182,7 @@ export class BackupManager {
 			}
 		}
 
-		console.log("\n✓ Restore completed");
+		console.log("\n[OK] Restore completed");
 
 		return {
 			fileCount: messages.length,

@@ -24,13 +24,13 @@ console.log("Test 1: Ping Membase Hub");
 try {
 	const isReachable = await client.ping();
 	if (isReachable) {
-		console.log("  ✓ Hub is reachable\n");
+		console.log("  [OK] Hub is reachable\n");
 	} else {
-		console.log("  ✗ Hub not reachable\n");
+		console.log("  [FAIL] Hub not reachable\n");
 		process.exit(1);
 	}
 } catch (error) {
-	console.error("  ✗ Ping failed:", error);
+	console.error("  [FAIL] Ping failed:", error);
 	process.exit(1);
 }
 
@@ -61,12 +61,12 @@ const bucket = `openclaw-backup-test-${testId}`;
 
 try {
 	await client.uploadMessage(owner, filename, testMessage, bucket);
-	console.log("  ✓ Upload successful");
+	console.log("  [OK] Upload successful");
 	console.log(`    Owner: ${owner}`);
 	console.log(`    Filename: ${filename}`);
 	console.log(`    Bucket: ${bucket}\n`);
 } catch (error) {
-	console.error("  ✗ Upload failed:", error);
+	console.error("  [FAIL] Upload failed:", error);
 	console.error("\nError details:", error);
 	process.exit(1);
 }
@@ -75,7 +75,7 @@ try {
 console.log("Test 3: Download and decrypt message");
 try {
 	const downloaded = await client.downloadMessage(owner, filename);
-	console.log("  ✓ Download successful");
+	console.log("  [OK] Download successful");
 	console.log(`    Message ID: ${downloaded.id}`);
 
 	// Decrypt
@@ -83,16 +83,16 @@ try {
 	const decrypted = MemoryEncryption.decrypt(encryptedData, testPassword);
 
 	if (decrypted === testContent) {
-		console.log("  ✓ Decryption successful");
-		console.log("  ✓ Content matches original\n");
+		console.log("  [OK] Decryption successful");
+		console.log("  [OK] Content matches original\n");
 	} else {
-		console.log("  ✗ Content mismatch!");
+		console.log("  [FAIL] Content mismatch!");
 		console.log("Expected:", testContent);
 		console.log("Got:", decrypted);
 		process.exit(1);
 	}
 } catch (error) {
-	console.error("  ✗ Download/decrypt failed:", error);
+	console.error("  [FAIL] Download/decrypt failed:", error);
 	process.exit(1);
 }
 
@@ -100,30 +100,30 @@ try {
 console.log("Test 4: List conversations");
 try {
 	const conversations = await client.listConversations(owner);
-	console.log(`  ✓ Found ${conversations.length} conversation(s)`);
+	console.log(`  [OK] Found ${conversations.length} conversation(s)`);
 
 	if (conversations.includes(bucket)) {
-		console.log(`  ✓ Our test bucket "${bucket}" is in the list\n`);
+		console.log(`  [OK] Our test bucket "${bucket}" is in the list\n`);
 	} else {
-		console.log(`  ⚠️  Test bucket not found in list (might take time to sync)\n`);
+		console.log(`  [WARNING]  Test bucket not found in list (might take time to sync)\n`);
 	}
 } catch (error) {
-	console.error("  ✗ List failed:", error);
+	console.error("  [FAIL] List failed:", error);
 }
 
 // Test 5: Get conversation
 console.log("Test 5: Get conversation messages");
 try {
 	const messages = await client.getConversation(owner, bucket);
-	console.log(`  ✓ Retrieved ${messages.length} message(s) from conversation`);
+	console.log(`  [OK] Retrieved ${messages.length} message(s) from conversation`);
 
 	if (messages.length > 0) {
-		console.log(`  ✓ First message ID: ${messages[0].id}`);
-		console.log(`  ✓ Message metadata:`, messages[0].metadata);
+		console.log(`  [OK] First message ID: ${messages[0].id}`);
+		console.log(`  [OK] Message metadata:`, messages[0].metadata);
 	}
 	console.log("");
 } catch (error) {
-	console.error("  ✗ Get conversation failed:", error);
+	console.error("  [FAIL] Get conversation failed:", error);
 }
 
 // Test 6: Full backup/restore simulation
@@ -157,12 +157,12 @@ try {
 		};
 
 		await client.uploadMessage(owner, `${backupId}_${i}`, message, backupId);
-		console.log(`  ✓ Uploaded ${file.path}`);
+		console.log(`  [OK] Uploaded ${file.path}`);
 	}
 
 	// Download and verify
 	const backupMessages = await client.getConversation(owner, backupId);
-	console.log(`  ✓ Downloaded ${backupMessages.length} files from backup`);
+	console.log(`  [OK] Downloaded ${backupMessages.length} files from backup`);
 
 	// Verify each file
 	for (let i = 0; i < backupMessages.length; i++) {
@@ -172,24 +172,24 @@ try {
 		const originalContent = files[i].content;
 
 		if (decrypted === originalContent) {
-			console.log(`  ✓ Verified ${(msg.metadata as any).file}`);
+			console.log(`  [OK] Verified ${(msg.metadata as any).file}`);
 		} else {
-			console.log(`  ✗ Verification failed for ${(msg.metadata as any).file}`);
+			console.log(`  [FAIL] Verification failed for ${(msg.metadata as any).file}`);
 			process.exit(1);
 		}
 	}
 
 	console.log("");
 } catch (error) {
-	console.error("  ✗ Backup/restore simulation failed:", error);
+	console.error("  [FAIL] Backup/restore simulation failed:", error);
 	process.exit(1);
 }
 
-console.log("✅ All Membase live tests passed!\n");
+console.log("Success All Membase live tests passed!\n");
 console.log("Summary:");
-console.log("  ✓ Membase Hub is accessible");
-console.log("  ✓ Upload works with encryption");
-console.log("  ✓ Download and decryption works");
-console.log("  ✓ Conversation listing works");
-console.log("  ✓ Full backup/restore cycle validated");
-console.log("\n🎉 Membase integration is FULLY FUNCTIONAL!\n");
+console.log("  [OK] Membase Hub is accessible");
+console.log("  [OK] Upload works with encryption");
+console.log("  [OK] Download and decryption works");
+console.log("  [OK] Conversation listing works");
+console.log("  [OK] Full backup/restore cycle validated");
+console.log("\n[SUCCESS] Membase integration is FULLY FUNCTIONAL!\n");
