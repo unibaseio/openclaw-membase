@@ -1,4 +1,4 @@
-# @unibase/openclaw-plugin-membase
+# @unibase/openclaw-membase
 
 Encrypted memory backup and restore for AI agents using Membase decentralized storage.
 
@@ -43,7 +43,7 @@ Integrates with OpenClaw to provide CLI commands and auto-backup hooks.
 
 **Install:**
 ```bash
-npm install github:unibaseio/openclaw-plugin-membase
+npm install github:unibaseio/openclaw-membase
 ```
 
 **Configure** `~/.openclaw/openclaw.json`:
