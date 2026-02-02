@@ -1,0 +1,50 @@
+{
+	"name": "@unibase/openclaw-plugin-membase",
+	"version": "0.1.0",
+	"description": "Encrypted memory backup and restore via Membase for OpenClaw",
+	"type": "module",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist",
+		"README.md",
+		"LICENSE"
+	],
+	"scripts": {
+		"build": "tsc",
+		"dev": "tsc --watch",
+		"prepublishOnly": "npm run build"
+	},
+	"keywords": [
+		"openclaw",
+		"openclaw-plugin",
+		"plugin",
+		"memory",
+		"backup",
+		"membase",
+		"encryption",
+		"decentralized"
+	],
+	"author": "Unibase",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/unibaseio/openclaw-plugin-membase.git"
+	},
+	"homepage": "https://github.com/unibaseio/openclaw-plugin-membase#readme",
+	"bugs": {
+		"url": "https://github.com/unibaseio/openclaw-plugin-membase/issues"
+	},
+	"peerDependencies": {
+		"openclaw": ">=2025.1.0"
+	},
+	"dependencies": {
+		"@inquirer/prompts": "^7.2.0",
+		"commander": "^12.1.0",
+		"fast-glob": "^3.3.2"
+	},
+	"devDependencies": {
+		"@types/node": "^22.0.0",
+		"typescript": "^5.7.2"
+	}
+}

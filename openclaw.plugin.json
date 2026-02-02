@@ -1,0 +1,32 @@
+{
+	"id": "memory-membase",
+	"kind": "memory",
+	"version": "0.1.0",
+	"description": "Encrypted memory backup and restore via Membase decentralized storage",
+	"author": "OpenClaw Contributors",
+	"configSchema": {
+		"type": "object",
+		"properties": {
+			"endpoint": {
+				"type": "string",
+				"description": "Membase Hub server URL",
+				"default": "https://testnet.hub.membase.io"
+			},
+			"agentName": {
+				"type": "string",
+				"description": "Unique identifier for your agent's backups",
+				"default": "default"
+			}
+		}
+	},
+	"uiHints": {
+		"endpoint": {
+			"label": "Membase Hub Endpoint",
+			"placeholder": "https://testnet.hub.membase.io"
+		},
+		"agentName": {
+			"label": "Agent Name",
+			"placeholder": "my-agent"
+		}
+	}
+}
