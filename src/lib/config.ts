@@ -14,7 +14,7 @@ export const membaseConfigSchema = {
 
 		// Default endpoint: Membase testnet
 		const endpoint =
-			cfg.endpoint || "https://testnet.hub.membase.io";
+			cfg.endpoint || "https://testnet.hub.membase.com";
 
 		// Agent name defaults to "default"
 		const agentName = cfg.agentName || "default";
@@ -40,7 +40,7 @@ export const membaseConfigSchema = {
 	uiHints: {
 		endpoint: {
 			label: "Membase Hub Endpoint",
-			placeholder: "https://testnet.hub.membase.io",
+			placeholder: "https://testnet.hub.membase.com",
 			description: "Membase Hub server URL (default: testnet)",
 		},
 		agentName: {

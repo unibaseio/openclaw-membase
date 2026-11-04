@@ -7,7 +7,7 @@ import { MembaseClient } from "../src/lib/membase-client.js";
 
 const ACCOUNT = process.env.MEMBASE_ACCOUNT;
 const SECRET_KEY = process.env.MEMBASE_SECRET_KEY;
-const ENDPOINT = process.env.MEMBASE_ENDPOINT || "https://testnet.hub.membase.io";
+const ENDPOINT = process.env.MEMBASE_ENDPOINT || "https://testnet.hub.membase.com";
 
 console.log("🧪 Testing Membase Hub Connection\n");
 
