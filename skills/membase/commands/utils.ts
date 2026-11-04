@@ -33,7 +33,7 @@ export function loadConfig(): MembaseConfig {
 
   // Merge with environment variables (env vars have priority)
   return {
-    endpoint: process.env.MEMBASE_ENDPOINT || openclawConfig.endpoint || 'https://testnet.hub.membase.io',
+    endpoint: process.env.MEMBASE_ENDPOINT || openclawConfig.endpoint || 'https://testnet.hub.membase.com',
     account: process.env.MEMBASE_ACCOUNT || openclawConfig.account || '',
     secretKey: process.env.MEMBASE_SECRET_KEY || openclawConfig.secretKey || '',
     agentName: process.env.MEMBASE_AGENT_NAME || openclawConfig.agentName || 'openclaw-agent',

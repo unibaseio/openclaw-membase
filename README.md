@@ -55,7 +55,7 @@ npm install github:unibaseio/openclaw-membase
       "memory-membase": {
         "enabled": true,
         "config": {
-          "endpoint": "https://testnet.hub.membase.io",
+          "endpoint": "https://testnet.hub.membase.com",
           "agentName": "my-agent",
           "autoBackup": { "enabled": true, "minInterval": 3600 }
         }

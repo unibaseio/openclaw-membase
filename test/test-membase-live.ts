@@ -13,9 +13,9 @@ process.env.MEMBASE_SECRET_KEY = "c9e64785ef9c51c4e1d1c4f2cfbfa51c1117e5cffcecc2
 
 console.log("🧪 Testing Membase Hub with Real Credentials\n");
 console.log("Account:", process.env.MEMBASE_ACCOUNT);
-console.log("Hub: https://testnet.hub.membase.io\n");
+console.log("Hub: https://testnet.hub.membase.com\n");
 
-const client = new MembaseClient("https://testnet.hub.membase.io");
+const client = new MembaseClient("https://testnet.hub.membase.com");
 const owner = process.env.MEMBASE_ACCOUNT;
 const testId = `openclaw-test-${Date.now()}`;
 

@@ -10,7 +10,7 @@
 			"endpoint": {
 				"type": "string",
 				"description": "Membase Hub server URL",
-				"default": "https://testnet.hub.membase.io"
+				"default": "https://testnet.hub.membase.com"
 			},
 			"agentName": {
 				"type": "string",
@@ -22,7 +22,7 @@
 	"uiHints": {
 		"endpoint": {
 			"label": "Membase Hub Endpoint",
-			"placeholder": "https://testnet.hub.membase.io"
+			"placeholder": "https://testnet.hub.membase.com"
 		},
 		"agentName": {
 			"label": "Agent Name",
