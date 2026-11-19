@@ -1,11 +1,11 @@
 # @unibase/openclaw-membase
 
-Encrypted memory backup and restore for AI agents using Membase decentralized storage.
+Encrypted memory backup and restore for AI agents, stored in Membase.
 
 ## Features
 
 - End-to-end encryption (AES-256-GCM)
-- Decentralized Membase storage
+- Stored in Membase
 - Incremental backup support
 - Auto-backup on agent completion
 
